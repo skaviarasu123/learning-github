@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Git & GitHub for Beginners</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Scroll progress bar — width driven by JS based on scroll position -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===== NAVIGATION ===== -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="logo">Git<span>Hub</span>101</a>
+
+      <!-- Hamburger button shown only on mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#what-is-git" class="nav-link">What is Git</a>
+        <a href="#what-is-github" class="nav-link">What is GitHub</a>
+        <a href="#uses" class="nav-link">Uses</a>
+        <a href="#why" class="nav-link">Why Use Them</a>
+        <a href="#problems" class="nav-link">Problems Solved</a>
+        <a href="#scenarios" class="nav-link">Real-Life Scenarios</a>
+        <a href="#commands" class="nav-link">Commands</a>
+
+        <!-- Theme toggle button -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" title="Toggle light/dark theme">
+          🌙
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section id="hero" class="hero">
+
+      <!-- Floating decorative icons — purely visual, bob up/down via CSS animation -->
+      <div class="floating-icons" aria-hidden="true">
+        <span class="float-icon" style="--delay:0s; --x:8%; --y:18%;">🌿</span>
+        <span class="float-icon" style="--delay:1.2s; --x:85%; --y:12%;">🔀</span>
+        <span class="float-icon" style="--delay:2.1s; --x:75%; --y:70%;">📦</span>
+        <span class="float-icon" style="--delay:0.6s; --x:15%; --y:75%;">💾</span>
+        <span class="float-icon" style="--delay:1.8s; --x:50%; --y:85%;">🐙</span>
+      </div>
+
+      <div class="hero-text">
+        <h1>Learn <span class="accent">Git</span> &amp; <span class="accent">GitHub</span></h1>
+        <p>A beginner-friendly guide to version control and collaborative coding — explained in plain English.</p>
+        <a href="#what-is-git" class="cta-button">Start Learning ↓</a>
+      </div>
+
+      <!-- Inline SVG: simple commit/branch graph as hero illustration -->
+      <div class="hero-graphic">
+        <svg viewBox="0 0 300 200" class="commit-graph" aria-hidden="true">
+          <!-- main branch line -->
+          <line x1="40" y1="160" x2="40" y2="40" stroke="var(--accent)" stroke-width="3"/>
+          <!-- feature branch line -->
+          <line x1="40" y1="100" x2="160" y2="60" stroke="var(--accent-soft)" stroke-width="3"/>
+          <line x1="160" y1="60" x2="40" y2="40" stroke="var(--accent-soft)" stroke-width="3" stroke-dasharray="4 4"/>
+
+          <!-- commit dots on main -->
+          <circle cx="40" cy="160" r="8" class="commit-dot"/>
+          <circle cx="40" cy="100" r="8" class="commit-dot"/>
+          <circle cx="40" cy="40" r="8" class="commit-dot"/>
+          <!-- commit dot on feature branch -->
+          <circle cx="160" cy="60" r="8" class="commit-dot commit-dot--feature"/>
+        </svg>
+      </div>
+    </section>
+
+    <!-- ===== WHAT IS GIT ===== -->
+    <section id="what-is-git" class="section reveal">
+      <h2>What is Git?</h2>
+      <div class="section-grid">
+        <div class="section-text">
+          <p>
+            <strong>Git</strong> is a <em>version control system</em> — a tool that tracks every change made
+            to your files over time. Think of it like a save-game system for your code: at any point you
+            can save a "checkpoint" (called a <strong>commit</strong>), and go back to it later if something breaks.
+          </p>
+          <p>
+            Git runs entirely on your own computer (it's "local"), so you don't need the internet to use it.
+            It was created in 2005 by Linus Torvalds, the creator of Linux.
+          </p>
+        </div>
+        <div class="section-visual">
+          <!-- Simple SVG showing a timeline of saved snapshots -->
+          <svg viewBox="0 0 280 100" aria-hidden="true">
+            <line x1="20" y1="50" x2="260" y2="50" stroke="var(--border)" stroke-width="2"/>
+            <g class="snapshot">
+              <circle cx="40" cy="50" r="10"/>
+              <text x="40" y="80" text-anchor="middle">v1</text>
+            </g>
+            <g class="snapshot">
+              <circle cx="140" cy="50" r="10"/>
+              <text x="140" y="80" text-anchor="middle">v2</text>
+            </g>
+            <g class="snapshot">
+              <circle cx="240" cy="50" r="10"/>
+              <text x="240" y="80" text-anchor="middle">v3</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT IS GITHUB ===== -->
+    <section id="what-is-github" class="section reveal alt-bg">
+      <h2>What is GitHub?</h2>
+      <div class="section-grid reverse">
+        <div class="section-text">
+          <p>
+            <strong>GitHub</strong> is a website that stores your Git projects online ("in the cloud") so you
+            can access them from anywhere and share them with others. If Git is the save-game system,
+            GitHub is like Google Drive for that save data — except built specifically for code.
+          </p>
+          <p>
+            GitHub adds features on top of Git: pull requests, issue tracking, project boards, and a place
+            for teams (or the whole world) to collaborate on the same codebase.
+          </p>
+        </div>
+        <div class="section-visual">
+          <!-- SVG: local computer <-> remote GitHub server -->
+          <svg viewBox="0 0 280 120" aria-hidden="true">
+            <rect x="10" y="35" width="80" height="50" rx="8" class="box-local"/>
+            <text x="50" y="65" text-anchor="middle" class="box-label">Local</text>
+
+            <rect x="190" y="35" width="80" height="50" rx="8" class="box-remote"/>
+            <text x="230" y="65" text-anchor="middle" class="box-label">GitHub</text>
+
+            <line x1="92" y1="50" x2="188" y2="50" stroke="var(--accent)" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#arrow)" class="flow-line"/>
+            <text x="140" y="42" text-anchor="middle" class="arrow-label">push</text>
+
+            <line x1="188" y1="72" x2="92" y2="72" stroke="var(--accent-soft)" stroke-width="3" stroke-dasharray="6 4" marker-end="url(#arrow2)" class="flow-line flow-line--reverse"/>
+            <text x="140" y="92" text-anchor="middle" class="arrow-label">pull</text>
+
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="var(--accent)"/>
+              </marker>
+              <marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 Z" fill="var(--accent-soft)"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== USES ===== -->
+    <section id="uses" class="section reveal">
+      <h2>Uses of Git &amp; GitHub</h2>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="card-icon">🗂️</div>
+          <h3>Version Tracking</h3>
+          <p>Keep a complete history of every change to your project, with the ability to undo mistakes.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">👥</div>
+          <h3>Team Collaboration</h3>
+          <p>Multiple people can work on the same project at once without overwriting each other's work.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">🌐</div>
+          <h3>Open Source</h3>
+          <p>Share your code publicly so anyone in the world can use it, learn from it, or contribute.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">📁</div>
+          <h3>Portfolio Building</h3>
+          <p>Showcase your projects to potential employers through a public GitHub profile.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">🔄</div>
+          <h3>Backup &amp; Sync</h3>
+          <p>Your code is safely stored online and synced across every device you work from.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">🚀</div>
+          <h3>CI/CD &amp; Automation</h3>
+          <p>Automatically test and deploy code whenever changes are pushed to GitHub.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHY USE GIT & GITHUB ===== -->
+    <section id="why" class="section reveal alt-bg">
+      <h2>Why Use Git &amp; GitHub?</h2>
+      <div class="card-grid">
+        <div class="info-card">
+          <div class="card-icon">⏪</div>
+          <h3>Never Lose Work</h3>
+          <p>Every commit is a safe checkpoint — undo mistakes instantly instead of starting over.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">🌿</div>
+          <h3>Experiment Safely</h3>
+          <p>Branches let you try new ideas in isolation without breaking the working project.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">🤝</div>
+          <h3>Work Together</h3>
+          <p>Teams can work on different features simultaneously, then merge their work together.</p>
+        </div>
+        <div class="info-card">
+          <div class="card-icon">🏢</div>
+          <h3>Industry Standard</h3>
+          <p>Almost every tech company uses Git &amp; GitHub — it's an essential skill for any developer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROBLEMS SOLVED ===== -->
+    <section id="problems" class="section reveal">
+      <h2>Problems Git &amp; GitHub Solve</h2>
+      <div class="problem-list">
+        <div class="problem-item">
+          <span class="problem-bad">❌ "final_v2_FINAL_reallyfinal.zip"</span>
+          <span class="problem-arrow">→</span>
+          <span class="problem-good">✅ Clean commit history with clear messages</span>
+        </div>
+        <div class="problem-item">
+          <span class="problem-bad">❌ Overwriting a teammate's changes by accident</span>
+          <span class="problem-arrow">→</span>
+          <span class="problem-good">✅ Merging changes safely, conflict by conflict</span>
+        </div>
+        <div class="problem-item">
+          <span class="problem-bad">❌ Losing all your code when a laptop dies</span>
+          <span class="problem-arrow">→</span>
+          <span class="problem-good">✅ Code safely backed up on GitHub's servers</span>
+        </div>
+        <div class="problem-item">
+          <span class="problem-bad">❌ No record of who changed what, or why</span>
+          <span class="problem-arrow">→</span>
+          <span class="problem-good">✅ Full history: who, what, when, and why</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== REAL-LIFE SCENARIOS ===== -->
+    <section id="scenarios" class="section reveal">
+      <h2>Real-Life Scenarios</h2>
+      <p class="section-intro">Click a card to flip it and see how Git &amp; GitHub solve the situation.</p>
+
+      <div class="scenario-grid">
+
+        <div class="scenario-card">
+          <div class="scenario-inner">
+            <div class="scenario-face scenario-front">
+              <div class="card-icon">🎓</div>
+              <h3>Group Assignment</h3>
+              <p>3 classmates editing the same report file by emailing "final_v2.docx" back and forth.</p>
+              <span class="flip-hint">Click to flip ↻</span>
+            </div>
+            <div class="scenario-face scenario-back">
+              <h3>With Git &amp; GitHub</h3>
+              <p>Each student works on their own branch, pushes to GitHub, and you merge everyone's work into one clean history — no overwritten paragraphs.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-inner">
+            <div class="scenario-face scenario-front">
+              <div class="card-icon">💼</div>
+              <h3>Job Applications</h3>
+              <p>A recruiter asks "do you have a GitHub profile?" and you have nothing to show.</p>
+              <span class="flip-hint">Click to flip ↻</span>
+            </div>
+            <div class="scenario-face scenario-back">
+              <h3>With Git &amp; GitHub</h3>
+              <p>Your projects live on GitHub with commit history proving you wrote the code yourself — an instant portfolio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-inner">
+            <div class="scenario-face scenario-front">
+              <div class="card-icon">🧪</div>
+              <h3>Risky New Feature</h3>
+              <p>You want to try a big change but you're scared of breaking the working app.</p>
+              <span class="flip-hint">Click to flip ↻</span>
+            </div>
+            <div class="scenario-face scenario-back">
+              <h3>With Git &amp; GitHub</h3>
+              <p><code>git branch experiment</code> isolates your changes — if it fails, just switch back to <code>main</code>, nothing is lost.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-inner">
+            <div class="scenario-face scenario-front">
+              <div class="card-icon">💻</div>
+              <h3>Laptop Crashes</h3>
+              <p>Your laptop dies the night before a deadline with weeks of code on it.</p>
+              <span class="flip-hint">Click to flip ↻</span>
+            </div>
+            <div class="scenario-face scenario-back">
+              <h3>With Git &amp; GitHub</h3>
+              <p>Since you pushed your commits, your code is safe on GitHub. <code>git clone</code> it onto any new machine in seconds.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-inner">
+            <div class="scenario-face scenario-front">
+              <div class="card-icon">🌍</div>
+              <h3>Contributing Open Source</h3>
+              <p>You found a bug in a popular open-source library and want to help fix it.</p>
+              <span class="flip-hint">Click to flip ↻</span>
+            </div>
+            <div class="scenario-face scenario-back">
+              <h3>With Git &amp; GitHub</h3>
+              <p>Fork the repo, fix the bug on a branch, then open a <strong>pull request</strong> — maintainers review and merge your fix.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scenario-card">
+          <div class="scenario-inner">
+            <div class="scenario-face scenario-front">
+              <div class="card-icon">⏰</div>
+              <h3>"It Worked Yesterday!"</h3>
+              <p>Code that worked last week is now broken and you don't know which change caused it.</p>
+              <span class="flip-hint">Click to flip ↻</span>
+            </div>
+            <div class="scenario-face scenario-back">
+              <h3>With Git &amp; GitHub</h3>
+              <p><code>git log</code> shows every change in order — pinpoint the exact commit that broke things and revert it.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== GIT COMMANDS & WORKFLOWS ===== -->
+    <section id="commands" class="section reveal alt-bg">
+      <h2>Basic Git Commands &amp; Workflows</h2>
+      <p class="section-intro">
+        Here are the essential commands every student needs to know, from setting up a project
+        to syncing changes with GitHub.
+      </p>
+
+      <!-- Branch/merge workflow diagram -->
+      <div class="section-visual centered">
+        <svg viewBox="0 0 320 140" aria-hidden="true">
+          <!-- main branch -->
+          <line x1="20" y1="100" x2="300" y2="100" stroke="var(--accent)" stroke-width="3"/>
+          <!-- feature branch out and back (merge) -->
+          <path d="M120,100 C160,40 200,40 240,100" fill="none" stroke="var(--accent-soft)" stroke-width="3"/>
+
+          <circle cx="60" cy="100" r="8" class="commit-dot"/>
+          <circle cx="120" cy="100" r="8" class="commit-dot"/>
+          <circle cx="180" cy="40" r="8" class="commit-dot commit-dot--feature"/>
+          <circle cx="240" cy="100" r="8" class="commit-dot"/>
+          <circle cx="280" cy="100" r="8" class="commit-dot"/>
+
+          <text x="60" y="120" text-anchor="middle" class="arrow-label">main</text>
+          <text x="180" y="25" text-anchor="middle" class="arrow-label">feature branch</text>
+          <text x="240" y="120" text-anchor="middle" class="arrow-label">merge</text>
+        </svg>
+      </div>
+
+      <div class="command-grid">
+
+        <div class="command-card" data-command="git init">
+          <h3><code>git init</code></h3>
+          <p>Creates a brand-new, empty Git repository in your current folder.</p>
+          <pre><code>git init</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git clone">
+          <h3><code>git clone</code></h3>
+          <p>Downloads (copies) an existing repository from GitHub onto your computer.</p>
+          <pre><code>git clone https://github.com/user/repo.git</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git add">
+          <h3><code>git add</code></h3>
+          <p>Stages changed files, marking them ready to be included in the next commit.</p>
+          <pre><code>git add filename.txt
+git add .   # stage everything</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git commit">
+          <h3><code>git commit</code></h3>
+          <p>Saves a checkpoint (snapshot) of your staged changes with a description message.</p>
+          <pre><code>git commit -m "Add login page"</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git push">
+          <h3><code>git push</code></h3>
+          <p>Uploads your local commits to GitHub, so others (and the cloud) have your latest work.</p>
+          <pre><code>git push origin main</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git pull">
+          <h3><code>git pull</code></h3>
+          <p>Downloads the latest changes from GitHub and merges them into your local copy.</p>
+          <pre><code>git pull origin main</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git branch">
+          <h3><code>git branch</code></h3>
+          <p>Creates (or lists) branches — separate lines of work that don't affect the main project.</p>
+          <pre><code>git branch new-feature</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git checkout">
+          <h3><code>git checkout / switch</code></h3>
+          <p>Switches you to a different branch, so you can work on it.</p>
+          <pre><code>git checkout new-feature
+git switch new-feature   # newer syntax</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git merge">
+          <h3><code>git merge</code></h3>
+          <p>Combines changes from one branch into another (e.g. feature into main).</p>
+          <pre><code>git checkout main
+git merge new-feature</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git status">
+          <h3><code>git status</code></h3>
+          <p>Shows what's changed, what's staged, and what branch you're currently on.</p>
+          <pre><code>git status</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git log">
+          <h3><code>git log</code></h3>
+          <p>Displays the history of commits — who changed what, and when.</p>
+          <pre><code>git log --oneline</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+        <div class="command-card" data-command="git remote">
+          <h3><code>git remote</code></h3>
+          <p>Manages connections between your local repo and remote repos like GitHub.</p>
+          <pre><code>git remote add origin https://github.com/user/repo.git</code></pre>
+          <button class="details-btn" type="button">Learn more</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== COMMAND DETAILS MODAL ===== -->
+  <!-- Hidden by default; JS fills #modalBody and toggles .open -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close dialog">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <p>Built for students learning Git &amp; GitHub. Vanilla HTML, CSS &amp; JavaScript — no frameworks.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
